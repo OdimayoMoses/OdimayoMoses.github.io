@@ -1,78 +1,301 @@
 <!DOCTYPE html>
-<html lang="en-us">
-    <head>
-        <title>SimpleLoginPageByOdimayo</title>
-        <style>
-            #body{
-                  background-color:#F0FFFF80;
-                  }
 
-            div#divform{
-                        line-height:80px}
-            div#divform table input{
-                              border-radius:20px;
-                              border-color:#FF22FF80;
-                              height:50px;
-                              width:120%;
-                              font-size:200%} 
-            @keyframes h1{
-            0%{color:#0000FF;}
-            20%{color:#1919FF}
-            40%{color:#4949FF}
-            60%{color:#6969FF}
-            80%{color:#C8C8FF}
-            100%{color:#FFFFFF}}
-            h1{
-                    font-size:300%;
-                    position:relative;
-                    color:#0000FF;
-                    left:55%;
-                    animation-name:h1;
-                    animation-iteration-count:infinite;
-                    animation-duration:5s;} 
-            table{
-                  width:80%;
-                  ;}
-            #submit{
-                    position:relative;
-                    left:50%;
-                    top:10%;
-                    width:30%;
-                    height:60px;
-                    border-radius:10px;
-                    color:#FF00FF;
-                    font-size:125%}
-           div#sub{
-                   position:relative;
-                   bottom:70%;}
-           label{
-                 font-style:italic;
-                 font-size:30px;}
-        </style>
-    </head>
-    <body id="body">
-        <h1>LOG-IN</h1>
-        <div id="divform" name="divform">
-            <form id="form" name="form">
-                <table>
-                   
-                    <tr>
-                        <th><label for="username">USERNAME:</label></th>
-                        <th><input type="text" id="username" name="username" placeholder="Username"></th>
-                    </tr>
-                    
-                </table>
-                <table>
-                    <tr>
-                        <th><label for="password">PASSWORD:</label></th>
-                        <th><input type="password" id="password" name="password" placeholder="Password"></th>
-                    </tr>
-                </table>
-                <div id="sub">
-                    <input type="button" value="Submit" id="submit">
-                </div>
+<html>
+<head>
+    <title>Example Webpage</title>
+    <meta name="author" content="Odimayo Taiye">
+    <style type="text/css">
+        body{
+            background-color:#6F8FAF;
+        }
+        div#exe{
+            width:100%;
+            height:100px;
+        }
+        div#exe p{
+            position:absolute;
+            top:5px;
+            left:30%;
+            font-size:40px;
+        }
+        div#userinput{
+            display:block;
+            border:5px #FF0000 solid;
+            height:300px;
+            width:80%;
+            position:relative;
+            top:50px;
+            left:15%;
+            
+        }
+        label#fornames{
+            color:#E1C16E;
+            position:absolute;
+            top:50px;
+            left:30px;
+            font-size:30px;
+        }
+        input#username{
+            border-radius:10px;
+            border-color:#CCCCFF;
+            position:absolute;
+            width:40%;
+            height:50px;
+            left:200px;
+            top:50px;
+            font-size:inherit;
+            color:#000000;
+        }
+        label#forpassword{
+            color:#E1C16E;
+            position:absolute;
+            top:150px;
+            left:30px;
+            font-size:30px;
+        }
+        input#password{
+            border-radius:10px;
+            border-color:#CCCCFF;
+            width:40%;
+            height:50px;
+            position:absolute;
+            left:200px;
+            top:150px;
+            font-size:inherit;
+            color:#000000;
+            
+        }
+        
+        input#submit{
+            position:absolute;
+            left:35%;
+            top:250px;
+            height:45px;
+            width:120px;
+            font-size:inherit;
+        }
+        div#miningbutton{
+            position:relative;
+            left:10%;
+            top:100px;
+            display:none;
+        }
+        input#mine{
+            width:300px;
+            position:absolute;
+            left:20%;
+            top:20px;
+            height:300px;
+            border-radius:300px;
+            font-size:40px;
+        }
+        
+        div#caution{
+            position:relative;
+            left:0px;
+            top:50px;
+            display:none;
+            color:#FF0000;
+            font-size:medium;
+            }
+            
+         
+        div#miningstats{
+            position:relative;
+            left:0px;
+            top:50px;
+            display:none;
+            color:#00FF00;
+            font-size:large;}
+            
+        div#contact{
+            position:relative;
+            left:30%;
+            top:500px;
+            display:none;
+            color:#00FF00;
+            font-size:large;}
+        dialog#devinfo input{
+            position:absolute;
+            left:98%;
+            top:0px;
+            color:#00FF00;
+            font-size:large;
+            border-radius:5px;
+        }
+        
+        
+        dialog#devinfo img{
+            height:150px;
+            width:30%;
+            border:#FF00FF 5px solid;
+        }
+        
+        dialog#roadmap input{
+            position:absolute;
+            left:98%;
+            top:0px;
+            color:#00FF00;
+            font-size:large;
+            border-radius:5px;
+        }
+        
+        
+    </style>
+    
+    <script type="text/javascript">
+        /*user details*/
+        var name;
+        var secret;
+        
+        var endat;
+        var timeleft = 86400;
+        var juststarting;
+        /* mining details */
+        var miningrate = 0.0000001;
+        var mining = "paused";
+        var starts;
+        var ended;
+        
+        var sub = false;
+        
+        
+        function Roadmap(){
+            document.getElementById("roadmap").showModal();
+        }
+        
+        function CloseRoadmap(){
+            document.getElementById("roadmap").close();
+        }
+        
+        function About(){
+            document.getElementById("devinfo").showModal();
+        }
+        function CloseAbout(){
+            document.getElementById("devinfo").close();
+        }
+        
+        function Submit(){
+            name = document.forms.myform.username.value ;
+            secret = document.forms.myform.password.value ;
+            if((name=="")||(secret=="")){
+                alert("Please Fill The Neccesary Fields");
+            }
+            else{
+                sub = true;
+                }
+            }
+            
+        function Mining(){
+            if(mining=="started"){
                 
-            </form>
-        </div>
-    </body>
+                var v = new Date();
+                ended = Number(Math.floor((v.getTime())/1000));
+                var preamount = Number(document.getElementById("amount").innerHTML);
+                document.getElementById("amount").innerHTML = "" + ((ended - starts)*miningrate + preamount).toFixed(7);
+                juststarting = true;
+                mining = "paused"; }
+            else if(mining=="paused"){
+                
+                if(!juststarting){
+                    timeleft = 86400;
+                }
+                else if(juststarting){
+                    var m = document.getElementById("mine").value;
+
+                    timeleft = Number(Number(m.split(":")[0])*3600) + (Number(m.split(":")[1])*60) + (Number(m.split(":")[2]));
+                }
+                
+                var newdate = new Date();
+                endat = timeleft + Math.floor((newdate.getTime())/1000);
+                var s = new Date();
+                starts = Number(Math.floor((s.getTime())/1000));
+                mining = "started";}
+            }
+        
+        setInterval(function(){
+            if(sub===true){
+                document.getElementById("userinput").style.display = "none";
+                document.getElementById("miningbutton").style.display = "block";
+                
+                document.getElementById("miningstats").style.display = "block";
+                document.getElementById("caution").style.display = "block";
+                document.getElementById("contact").style.display = "block";
+                
+                if(mining==="started"){
+                    var times = new Date();
+                    var timelefts = endat -  Math.floor((times.getTime())/1000);
+                    document.getElementById("mine").value = "" + Math.floor(timelefts/3600) +" : " + (Math.floor((timelefts%3600)/60)) + " : " + (timelefts)%60 ;
+            }
+                }
+                
+            else if(sub==="false"){
+                }
+            
+        },10);
+        
+        
+    </script>
+</head>
+<body>
+    <div id="exe">
+       <p>BEST MINING SOFTWARE</p> 
+    </div>
+    <div id="userinput">
+        <form id="myform" name="myform">
+            <!-- Users data verification form -->
+            <label id="fornames" for="username">Username</label><input type="text" id="username" name="username" placeholder="Odimayo">
+            
+            <label id="forpassword" for="password">Password</label><input type="password" id="password" name="password" placeholder="******"><br />
+            
+            <input id="submit" type="button" value="Submit" onclick=Submit()>
+         
+        </form>
+        
+    </div>
+    
+    <div id="miningstats">
+        <p>Current Mining Rate : 0.0000001 Odi/second</p>
+        <p id="wallet">Odi Wallet:<b id="amount">0</b><b>Odi</b>
+    </div>  </p>
+    <div id="caution">
+        <p><u>Caution</u></p>
+        <ul>
+            <li>Make Sure You Are Currently Mining.</li>
+            <li>Mining Stops When You Leave The Page.</li>
+            <li>The Project Is In It's Test Phase.</li>
+            <li>Amount Reflect On Your Wallet After Mining Period Elaspe Or Paused.</li>
+        </ul>
+    </div>
+    
+    <div id="miningbutton">
+        <input type="button" value="Start Mining" id="mine" class="mine" style="background-color:#00FFFF;" onclick=Mining()>
+    </div>
+    <div id="contact">
+        <input onclick=About() type="button" value="ABOUT THE DEVELOPER">
+        
+        <dialog id="devinfo" style="height:400px;">
+            <input value="x" onclick=CloseAbout() type="button">
+            <img src="C:\Users\ADMIN\Downloads\Pictures\MyPictures\Odimayo.jpg" alt="Developers image" id="odimag">
+            <p id="abou">Full Name : Odimayo Taiye Moses<br />
+                         Education : <ul><li>BSc Electronic And Electrical Engineering, Obafemi Awolowo University.</li>
+                                   <li>Staff Comprehensive Secondary School 1 .</li></ul><br />
+                         Hobbies: Software developer(front end developer with reactjs, python and java programmer intermediate level), and fish chess player.<br />
+                         Contact: <ul><li>Twitter username: @OdimayoMoses</li>
+                                 <li>Gmail:<a href="mailto:odimayomoses@gmail.com">odimayomoses@gmail.com</a></li>
+                                 <li>Phone no: 08132440445</li></ul></p>
+            
+        </dialog>
+        
+        <input type="button" onclick=Roadmap() value="PROJECT ROADMAP">
+        <dialog id="roadmap" style="height:400px; width:auto">
+            <input value="x" onclick=CloseRoadmap() type="button">
+            <p style="font-size:40px; color:#00FF00; position:absolute; left:20%"> COMING SOON</p>
+            
+            
+        </dialog>
+    </div>
+
+
+</body>
 </html>
